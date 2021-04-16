@@ -1,7 +1,12 @@
-const ListGroup = (props) => {
-   const { items, textProperty, valueProperty, onSelect, selectedItem } = props;
+const ListGroup = ({
+   items,
+   textProperty,
+   valueProperty,
+   onSelect,
+   selectedItem,
+}) => {
    return (
-      <ul className='list-group'>
+      <ul className='list-group clickable'>
          {items.map((item) => (
             <li
                onClick={() => onSelect(item)}
