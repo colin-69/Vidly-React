@@ -1,30 +1,32 @@
 import React, { Component } from "react";
-class LoginForm extends Component {
+import Joi from "joi-browser";
+import Form from "./common/form";
+
+class LoginForm extends Form {
+   state = {
+      data: { username: "", password: "" },
+      errors: {},
+   };
+
+   schema = {
+      username: Joi.string().required().label("Username"),
+      password: Joi.string().required().label("Password"),
+   };
+
    username = React.createRef();
-   handelSubmit = (e) => {
-      e.preventDefault();
-      const username = this.username.current.value;
+
+   doSubmit = () => {
       console.log("submitted");
    };
+
    render() {
       return (
          <div>
             <h1>Login</h1>
             <form onSubmit={this.handelSubmit}>
-               <div className='form-group'>
-                  <label htmlFor='username'>Username</label>
-                  <input
-                     ref={this.username}
-                     id='username'
-                     type='text'
-                     className='form-control'
-                  />
-               </div>
-               <div className='form-group'>
-                  <label htmlFor='password'></label>Password
-                  <input id='password' type='text' className='form-control' />
-               </div>
-               <button className='btn btn-primary'>Login</button>
+               {this.renderInput("username", "Username")}
+               {this.renderInput("password", "Password", "password")}
+               {this.renderButton("Login")}
             </form>
          </div>
       );
